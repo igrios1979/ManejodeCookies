@@ -41,14 +41,26 @@ public class ProductoxlsServervlet extends HttpServlet {
             out.println("<head>");
             out.println("    <meta charset=\"UTF-8\">");
             out.println("    <title>Listado</title>");
-            out.println("    <link rel=\"stylesheet\" href=\"styles.css\">");
+            out.println("    <style>");
+            out.println("        table {");
+            out.println("            border-collapse: collapse;");
+            out.println("            width: 100%;");
+            out.println("        }");
+            out.println("        th, td {");
+            out.println("            padding: 8px;");
+            out.println("            text-align: left;");
+            out.println("            border-bottom: 1px solid #ddd;");
+            out.println("        }");
+            out.println("    </style>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h2>Listado</h2>");
 
             if (cookieOptional.isPresent()) {
+                // Mostrar el nombre de usuario si existe una cookie válida
                 out.println("<h1>HOLA <<" + cookieOptional.get() + ">> </h1>");
             } else {
+                // Mostrar un mensaje de bienvenida para los invitados
                 out.println("<h1>HOLA, Invitado</h1>");
             }
 
@@ -60,6 +72,7 @@ public class ProductoxlsServervlet extends HttpServlet {
             out.println("<th>Nombre</th>");
             out.println("<th>Tipo</th>");
             if (cookieOptional.isPresent()) {
+                // Mostrar la columna de precio solo para usuarios autenticados
                 out.println("<th>Precio</th>");
             }
             out.println("</tr>");
@@ -73,18 +86,20 @@ public class ProductoxlsServervlet extends HttpServlet {
                 out.println("<td>" + p.getNombre() + "</td>");
                 out.println("<td>" + p.getTipo() + "</td>");
                 if (cookieOptional.isPresent()) {
+                    // Mostrar el precio solo para usuarios autenticados
                     out.println("<td>" + p.getPecio() + "</td>");
-
                 }
-
                 out.println("</tr>");
             }
-            out.println("<p><a href='"+req.getContextPath()+"/index.html'>VOLVER</a></p>");
+
+            // Agregar un enlace para volver a la página principal
+            out.println("<p><a href='" + req.getContextPath() + "/index.html'>VOLVER</a></p>");
+
             out.println("</tbody>");
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");
-        }
+        } //fintry
     }
 
 }
